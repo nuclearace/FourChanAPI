@@ -81,7 +81,7 @@ struct FourChanAPI {
         return NSURL(string: "https://a.4cdn.org/\(board.board)/threads.json")!
     }
     
-    static func getThreadJSONForBoard(board: FCBoard, withThread thread: Int) -> NSURL {
+    static func getThreadJSONForBoard(board: FCBoard, forThread thread: Int) -> NSURL {
         return NSURL(string: "https://a.4cdn.org/\(board.board)/thread/\(thread).json")!
     }
 }

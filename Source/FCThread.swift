@@ -59,7 +59,7 @@ public class FCThread {
     }
 
     public func updatePosts(callback: PostsCallback) {
-        let url = FourChanAPI.getThreadJSONForBoard(board, withThread: num)
+        let url = FourChanAPI.getThreadJSONForBoard(board, forThread: num)
         let req = NSURLRequest(URL: url)
         
         FourChanAPI.getNSDictionaryWithRequest(req) {thread in
