@@ -26,7 +26,7 @@ import Foundation
 
 public class FCThread {
     public let board: FCBoard
-    public let num: ThreadNumber
+    public let num: Int
     
     public private(set) var lastModified: Int?
     public private(set) var posts = [FCPost]()
@@ -45,36 +45,28 @@ public class FCThread {
         return posts[n]
     }
     
-    public init(board: FCBoard, num: ThreadNumber, lastModified: Int) {
+    public init(board: FCBoard, num: Int, lastModified: Int) {
         self.board = board
         self.num = num
         self.lastModified = lastModified
     }
     
-    public init(board: FCBoard, num: ThreadNumber, json: NSDictionary) {
-        self.board = board
-        self.num = num
-        self.lastModified = -1
-        self._updatePostsWithJSON(json)
-    }
-    
-    public func updatePostsWithCallback(callback: (() -> Void)?) {
-        board.getThreadJSONForThread(num) {success, json, err in
-            if !success || json == nil {
-                return
-            }
-            
-            self._updatePostsWithJSON(json!)
-            callback?()
-        }
-    }
-    
-    private func _updatePostsWithJSON(json: NSDictionary) {
-        posts.removeAll(keepCapacity: true)
+    static func createThreadFromJSON(json: [String: AnyObject], onBoard board: FCBoard) -> FCThread {
+        let no = json["no"] as! Int
+        let last = json["last_modified"] as! Int
         
-        for post in json["posts"] as! NSArray {
-            let p = FCPost(post: post as! [String: AnyObject])
-            posts.append(p)
+        return FCThread(board: board, num: no, lastModified: last)
+    }
+
+    public func updatePosts(callback: PostsCallback) {
+        let url = FourChanAPI.getThreadJSONForBoard(board, withThread: num)
+        let req = NSURLRequest(URL: url)
+        
+        FourChanAPI.getNSDictionaryWithRequest(req) {thread in
+            guard let posts = thread["posts"] as? [[String: AnyObject]] else { return }
+            
+            self.posts = posts.map({FCPost(post: $0)})
+            callback(self.posts)
         }
     }
 }

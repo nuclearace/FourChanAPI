@@ -19,10 +19,10 @@
 		744FB0AD1CE630790096DDCC /* FCPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A61CE630790096DDCC /* FCPost.swift */; };
 		744FB0AE1CE630790096DDCC /* FCThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A71CE630790096DDCC /* FCThread.swift */; };
 		744FB0AF1CE630790096DDCC /* FCThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A71CE630790096DDCC /* FCThread.swift */; };
-		744FB0B01CE630790096DDCC /* FCTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A81CE630790096DDCC /* FCTypes.swift */; };
-		744FB0B11CE630790096DDCC /* FCTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A81CE630790096DDCC /* FCTypes.swift */; };
 		744FB0B21CE630790096DDCC /* FourChanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A91CE630790096DDCC /* FourChanAPI.swift */; };
 		744FB0B31CE630790096DDCC /* FourChanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A91CE630790096DDCC /* FourChanAPI.swift */; };
+		744FB0B51CE635F70096DDCC /* FCCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0B41CE635F70096DDCC /* FCCallbacks.swift */; };
+		744FB0B61CE635F70096DDCC /* FCCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0B41CE635F70096DDCC /* FCCallbacks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +58,8 @@
 		744FB0A51CE630790096DDCC /* FCBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCBoard.swift; path = Source/FCBoard.swift; sourceTree = "<group>"; };
 		744FB0A61CE630790096DDCC /* FCPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCPost.swift; path = Source/FCPost.swift; sourceTree = "<group>"; };
 		744FB0A71CE630790096DDCC /* FCThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCThread.swift; path = Source/FCThread.swift; sourceTree = "<group>"; };
-		744FB0A81CE630790096DDCC /* FCTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCTypes.swift; path = Source/FCTypes.swift; sourceTree = "<group>"; };
 		744FB0A91CE630790096DDCC /* FourChanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FourChanAPI.swift; path = Source/FourChanAPI.swift; sourceTree = "<group>"; };
+		744FB0B41CE635F70096DDCC /* FCCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCCallbacks.swift; path = Source/FCCallbacks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,9 +160,9 @@
 			isa = PBXGroup;
 			children = (
 				744FB0A51CE630790096DDCC /* FCBoard.swift */,
+				744FB0B41CE635F70096DDCC /* FCCallbacks.swift */,
 				744FB0A61CE630790096DDCC /* FCPost.swift */,
 				744FB0A71CE630790096DDCC /* FCThread.swift */,
-				744FB0A81CE630790096DDCC /* FCTypes.swift */,
 				744FB0A91CE630790096DDCC /* FourChanAPI.swift */,
 			);
 			name = Source;
@@ -342,9 +342,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				744FB0B51CE635F70096DDCC /* FCCallbacks.swift in Sources */,
 				744FB0AE1CE630790096DDCC /* FCThread.swift in Sources */,
 				744FB0AC1CE630790096DDCC /* FCPost.swift in Sources */,
-				744FB0B01CE630790096DDCC /* FCTypes.swift in Sources */,
 				744FB0B21CE630790096DDCC /* FourChanAPI.swift in Sources */,
 				744FB0AA1CE630790096DDCC /* FCBoard.swift in Sources */,
 			);
@@ -362,9 +362,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				744FB0B61CE635F70096DDCC /* FCCallbacks.swift in Sources */,
 				744FB0AF1CE630790096DDCC /* FCThread.swift in Sources */,
 				744FB0AD1CE630790096DDCC /* FCPost.swift in Sources */,
-				744FB0B11CE630790096DDCC /* FCTypes.swift in Sources */,
 				744FB0B31CE630790096DDCC /* FourChanAPI.swift in Sources */,
 				744FB0AB1CE630790096DDCC /* FCBoard.swift in Sources */,
 			);

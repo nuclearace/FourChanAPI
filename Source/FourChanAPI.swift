@@ -24,7 +24,6 @@
 
 import Foundation
 
-
 struct FourChanAPI {
     static func createJSONLinkForBoard(board: String) -> NSURL {
         return NSURL(string: "https://a.4cdn.org/\(board)/catalog.json")!
@@ -34,26 +33,26 @@ struct FourChanAPI {
         return NSURL(string: "https://a.4cdn.org/boards.json")!
     }
     
-    static func getImageLinkForTim(tim: Tim, withExt ext: Ext, forBoard board: FCBoard) -> NSURL {
+    static func getImageLinkForTim(tim: Int, withExt ext: Int, forBoard board: FCBoard) -> NSURL {
         return NSURL(string: "https://i.4cdn.org/\(board.board)/\(tim).\(ext)")!
     }
     
     static func getNSArrayWithRequest(req: NSURLRequest, withCallback callback: ArrayCallback) {
         NSURLSession.sharedSession().dataTaskWithRequest(req) {data, res, err in
             if err != nil || data == nil {
-                callback(false, nil, err!.localizedDescription)
+                callback([])
                 return
             }
             
             do {
-                guard let arr = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? NSArray else {
-                    callback(false, nil, "Error parsing")
+                guard let arr = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? [AnyObject] else {
+                    callback([])
                     return
                 }
                 
-                callback(true, arr, nil)
+                callback(arr)
             } catch {
-                callback(false, nil, "Error")
+                callback([])
             }
         }.resume()
     }
@@ -61,19 +60,19 @@ struct FourChanAPI {
     static func getNSDictionaryWithRequest(req: NSURLRequest, withCallback callback: DictionaryCallback) {
         NSURLSession.sharedSession().dataTaskWithRequest(req) {data, res, err in
             if err != nil || data == nil {
-                callback(false, nil, err!.localizedDescription)
+                callback([:])
                 return
             }
             
             do {
-                guard let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? NSDictionary else {
-                    callback(false, nil, "Error parsing")
+                guard let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? [String: AnyObject] else {
+                    callback([:])
                     return
                 }
                 
-                callback(true, dict, nil)
+                callback(dict)
             } catch {
-                callback(false, nil, "Error")
+                callback([:])
             }
         }.resume()
     }
@@ -82,7 +81,7 @@ struct FourChanAPI {
         return NSURL(string: "https://a.4cdn.org/\(board.board)/threads.json")!
     }
     
-    static func getThreadJSONForBoard(board: FCBoard, withThread thread: ThreadNumber) -> NSURL {
+    static func getThreadJSONForBoard(board: FCBoard, withThread thread: Int) -> NSURL {
         return NSURL(string: "https://a.4cdn.org/\(board.board)/thread/\(thread).json")!
     }
 }

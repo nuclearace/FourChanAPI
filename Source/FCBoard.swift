@@ -25,62 +25,61 @@
 import Foundation
 
 public class FCBoard {
-    let board: BoardString
-    let boardJSONURL: NSURL
-    var pages: NSArray?
-    var threads = [FCThread]()
+    public let board: String
+    public let boardJSONURL: NSURL
     
-    init(name: BoardString) {
+    public private(set) var pages: NSArray?
+    public private(set) var threads = [FCThread]()
+    
+    init(name: String) {
         self.board = name
         self.boardJSONURL = FourChanAPI.createJSONLinkForBoard(board)
     }
     
-    public static func getAllBoardsWithCallback(callback:DictionaryCallback) {
-        let req = NSURLRequest(URL: ALLBOARDS)
+    public static func getAllBoards(callback: BoardsCallback) {
+        let req = NSURLRequest(URL: NSURL(string: "https://a.4cdn.org/boards.json")!)
         
-        FourChanAPI.getNSDictionaryWithRequest(req, withCallback: callback)
+        FourChanAPI.getNSDictionaryWithRequest(req) {boards in
+            guard let boards = boards["boards"] as? [[String: AnyObject]] else {
+                callback([])
+                return
+            }
+            
+            callback(boards.map({
+                let name = $0["board"] as? String ?? ""
+                
+                return FCBoard(name: name)
+            }))
+        }
     }
     
-    // callback: (success: Bool, arr:NSArray, error:NSError) -> Void
-    public func getCatalogWithCallback(callback:ArrayCallback) {
-        let req = NSURLRequest(URL: self.boardJSONURL)
-        
-        FourChanAPI.getNSArrayWithRequest(req, withCallback: callback)
-    }
-    
-    public func getThreadJSONForThread(num:ThreadNumber, withCallback callback:DictionaryCallback) {
-        let url = FourChanAPI.getThreadJSONForBoard(self, withThread: num)
-        let req = NSURLRequest(URL: url)
-        
-        FourChanAPI.getNSDictionaryWithRequest(req, withCallback: callback)
-    }
+//    public func getCatalogWithCallback(callback: ThreadsCallback) {
+//        let req = NSURLRequest(URL: boardJSONURL)
+//        
+//        FourChanAPI.getNSArrayWithRequest(req) {threads in
+//            print(threads)
+//        }
+//    }
     
     // Should probably use updateThreadsWithCallback
-    public func getThreadsWithCallback(callback: ArrayCallback) {
+    public func getThreads(callback: ThreadsCallback) {
         let url = FourChanAPI.getThreadsJSONForBoard(self)
         let req = NSURLRequest(URL: url)
         
-        FourChanAPI.getNSArrayWithRequest(req) {success, arr, err in
-            if !success || arr == nil {
-                callback(false, nil, err)
+        FourChanAPI.getNSArrayWithRequest(req) {threads in
+            if threads.count == 0 {
+                callback([])
                 return
             }
             
-            self.pages = arr
+            self.pages = threads
             self._updateThreadsFromPages()
-            callback(true, self.pages, nil)
+            callback(self.threads)
         }
     }
     
-    public func updateThreadsWithCallback(callback: ((Bool, String?) -> Void)?) {
-        getThreadsWithCallback {success, arr, err in
-            if !success || arr == nil {
-                callback?(false, err)
-                return
-            }
-            
-            callback?(true, nil)
-        }
+    public func updateThreads(callback: ThreadsCallback) {
+        getThreads(callback)
     }
     
     private func _updateThreadsFromPages() {
@@ -92,12 +91,8 @@ public class FCBoard {
         
         for page in pages! {
             for thread in page["threads"] as! NSArray {
-                if let t = thread as? NSDictionary {
-                    let no = t["no"] as! ThreadNumber
-                    let last = t["last_modified"] as! Int
-                    let newThread = FCThread(board: self, num: no, lastModified: last)
-                    
-                    threads.append(newThread)
+                if let t = thread as? [String: AnyObject] {
+                    threads.append(FCThread.createThreadFromJSON(t, onBoard: self))
                 }
             }
         }
