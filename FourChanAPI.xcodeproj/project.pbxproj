@@ -23,8 +23,8 @@
 		744FB0B31CE630790096DDCC /* FourChanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0A91CE630790096DDCC /* FourChanAPI.swift */; };
 		744FB0B51CE635F70096DDCC /* FCCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0B41CE635F70096DDCC /* FCCallbacks.swift */; };
 		744FB0B61CE635F70096DDCC /* FCCallbacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744FB0B41CE635F70096DDCC /* FCCallbacks.swift */; };
-		74B95FB41CE6659500570114 /* FCBoardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B95FB31CE6659500570114 /* FCBoardOptions.swift */; };
-		74B95FB51CE6659500570114 /* FCBoardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B95FB31CE6659500570114 /* FCBoardOptions.swift */; };
+		74D6FE5A1CE679F000F94831 /* FCBoardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D6FE591CE679F000F94831 /* FCBoardOptions.swift */; };
+		74D6FE5B1CE679F000F94831 /* FCBoardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D6FE591CE679F000F94831 /* FCBoardOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,7 @@
 		744FB0A71CE630790096DDCC /* FCThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCThread.swift; path = Source/FCThread.swift; sourceTree = "<group>"; };
 		744FB0A91CE630790096DDCC /* FourChanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FourChanAPI.swift; path = Source/FourChanAPI.swift; sourceTree = "<group>"; };
 		744FB0B41CE635F70096DDCC /* FCCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCCallbacks.swift; path = Source/FCCallbacks.swift; sourceTree = "<group>"; };
-		74B95FB31CE6659500570114 /* FCBoardOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCBoardOptions.swift; sourceTree = "<group>"; };
+		74D6FE591CE679F000F94831 /* FCBoardOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FCBoardOptions.swift; path = Source/FCBoardOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				744FB0A51CE630790096DDCC /* FCBoard.swift */,
-				74B95FB31CE6659500570114 /* FCBoardOptions.swift */,
+				74D6FE591CE679F000F94831 /* FCBoardOptions.swift */,
 				744FB0B41CE635F70096DDCC /* FCCallbacks.swift */,
 				744FB0A61CE630790096DDCC /* FCPost.swift */,
 				744FB0A71CE630790096DDCC /* FCThread.swift */,
@@ -346,8 +346,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74B95FB41CE6659500570114 /* FCBoardOptions.swift in Sources */,
 				744FB0B51CE635F70096DDCC /* FCCallbacks.swift in Sources */,
+				74D6FE5A1CE679F000F94831 /* FCBoardOptions.swift in Sources */,
 				744FB0AE1CE630790096DDCC /* FCThread.swift in Sources */,
 				744FB0AC1CE630790096DDCC /* FCPost.swift in Sources */,
 				744FB0B21CE630790096DDCC /* FourChanAPI.swift in Sources */,
@@ -367,8 +367,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74B95FB51CE6659500570114 /* FCBoardOptions.swift in Sources */,
 				744FB0B61CE635F70096DDCC /* FCCallbacks.swift in Sources */,
+				74D6FE5B1CE679F000F94831 /* FCBoardOptions.swift in Sources */,
 				744FB0AF1CE630790096DDCC /* FCThread.swift in Sources */,
 				744FB0AD1CE630790096DDCC /* FCPost.swift in Sources */,
 				744FB0B31CE630790096DDCC /* FourChanAPI.swift in Sources */,
