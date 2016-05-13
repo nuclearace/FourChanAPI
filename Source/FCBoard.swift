@@ -31,7 +31,7 @@ public class FCBoard {
     public private(set) var pages: NSArray?
     public private(set) var threads = [FCThread]()
     
-    init(name: String) {
+    public init(name: String) {
         self.board = name
         self.boardJSONURL = FourChanAPI.createJSONLinkForBoard(board)
     }
@@ -53,15 +53,6 @@ public class FCBoard {
         }
     }
     
-//    public func getCatalogWithCallback(callback: ThreadsCallback) {
-//        let req = NSURLRequest(URL: boardJSONURL)
-//        
-//        FourChanAPI.getNSArrayWithRequest(req) {threads in
-//            print(threads)
-//        }
-//    }
-    
-    // Should probably use updateThreadsWithCallback
     public func getThreads(callback: ThreadsCallback) {
         let url = FourChanAPI.getThreadsJSONForBoard(self)
         let req = NSURLRequest(URL: url)
