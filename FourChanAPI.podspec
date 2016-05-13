@@ -3,6 +3,10 @@ Pod::Spec.new do |s|
   s.module_name  = "FourChanAPI"
   s.version      = "0.0.1"
   s.summary      = "Wrapper for the 4chan api"
+  s.description  = <<-DESC
+                    Wrapper for the 4chan API. For iOS/OS X
+                   DESC
+  s.homepage     = "https://github.com/nuclearace/FourChanAPI"
   s.license      = { :type => 'MIT' }
   s.author       = { "Erik" => "nuclear.ace@gmail.com" }
   s.ios.deployment_target = '8.0'
