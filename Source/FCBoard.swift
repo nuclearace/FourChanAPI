@@ -28,16 +28,32 @@ public class FCBoard {
     public let board: String
     public let boardJSONURL: NSURL
     
+    /// Be sure to call fetchOptions before accessing
+    public private(set) var options = [FCBoardOption]()
     public private(set) var pages: NSArray?
     public private(set) var threads = [FCThread]()
     
-    public init(name: String) {
+    private static var boards = [FCBoard]()
+    
+    public init(name: String, options: [FCBoardOption] = []) {
         self.board = name
+        self.options = options
         self.boardJSONURL = FourChanAPI.createJSONLinkForBoard(board)
     }
     
     public static func getAllBoards(callback: BoardsCallback) {
         let req = NSURLRequest(URL: NSURL(string: "https://a.4cdn.org/boards.json")!)
+        
+        func createBoard(json: [String: AnyObject]) -> FCBoard {
+            let name = json["board"] as? String ?? ""
+            let options = FCBoardOption.createOptionsFromJSON(json)
+            
+            return FCBoard(name: name, options: options)
+        }
+        
+        if FCBoard.boards.count != 0 {
+            return callback(boards)
+        }
         
         FourChanAPI.getNSDictionaryWithRequest(req) {boards in
             guard let boards = boards["boards"] as? [[String: AnyObject]] else {
@@ -45,12 +61,27 @@ public class FCBoard {
                 return
             }
             
-            callback(boards.map({
-                let name = $0["board"] as? String ?? ""
-                
-                return FCBoard(name: name)
-            }))
+            callback(boards.map(createBoard))
         }
+    }
+    
+    public func getOptions(callback: OptionsCallback) {
+        guard options.isEmpty else { return callback(options) }
+        
+        func setOptionsFromBoards(boards: [FCBoard]) {
+            let board = boards.filter({$0.board == self.board})[0]
+            options = board.options
+        }
+        
+        if !FCBoard.boards.isEmpty {
+            setOptionsFromBoards(FCBoard.boards)
+            return callback(options)
+        }
+        
+        FCBoard.getAllBoards {boards in
+            setOptionsFromBoards(boards)
+            callback(self.options)
+        }        
     }
     
     public func getThreads(callback: ThreadsCallback) {
