@@ -15,5 +15,4 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/nuclearace/FourChanAPI.git", :tag => 'v0.0.1' }
   s.source_files  = "Source/**/*.swift"
   s.requires_arc = true
-  # s.dependency 'Starscream', '~> 0.9' # currently this repo includes Starscream swift files
 end
