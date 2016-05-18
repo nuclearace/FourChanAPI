@@ -13,8 +13,8 @@ FCBoard.getAllBoards {boards in
     print(boards)
 }
 
-// Updates the board's thread list
-a.updateThreads {threads in
+// Gets the board's thread list
+a.getThreads {threads in
     print(threads)
     let thread1 = a.threads[1]
     
