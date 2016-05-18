@@ -51,7 +51,7 @@ public class FCBoard {
             return FCBoard(name: name, options: options)
         }
         
-        if FCBoard.boards.count != 0 {
+        if !FCBoard.boards.isEmpty {
             return callback(boards)
         }
         
@@ -98,10 +98,6 @@ public class FCBoard {
             self._updateThreadsFromPages()
             callback(self.threads)
         }
-    }
-    
-    public func updateThreads(callback: ThreadsCallback) {
-        getThreads(callback)
     }
     
     private func _updateThreadsFromPages() {

@@ -38,10 +38,6 @@ public struct FCPost : CustomStringConvertible {
     }
     
     public subscript(str: String) -> AnyObject? {
-        if let value:AnyObject = post[str] {
-            return value
-        }
-        
-        return nil
+        return post[str]
     }
 }
