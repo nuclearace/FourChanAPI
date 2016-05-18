@@ -61,7 +61,9 @@ public class FCBoard {
                 return
             }
             
-            callback(boards.map(createBoard))
+            FCBoard.boards = boards.map(createBoard)
+            
+            callback(FCBoard.boards)
         }
     }
     

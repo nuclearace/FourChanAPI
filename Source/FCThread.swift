@@ -24,7 +24,10 @@
 
 import Foundation
 
-public class FCThread {
+public class FCThread : SequenceType {
+    public typealias Generator = Array<FCPost>.Generator
+    public typealias SubSequence = Array<FCPost>.SubSequence
+    
     public let board: FCBoard
     public let num: Int
     
@@ -68,5 +71,47 @@ public class FCThread {
             self.posts = posts.map({FCPost(post: $0)})
             callback(self.posts)
         }
+    }
+    
+    // SequenceType
+    
+    public func generate() -> Generator {
+        return posts.generate()
+    }
+    
+    public func underestimateCount() -> Int {
+        return posts.underestimateCount()
+    }
+    
+    public func map<T>(@noescape transform: (Generator.Element) throws -> T) rethrows -> [T] {
+        return try posts.map(transform)
+    }
+    
+    public func filter(@noescape includeElement: (Generator.Element) throws -> Bool) rethrows -> [Generator.Element] {
+        return try posts.filter(includeElement)
+    }
+    
+    public func forEach(@noescape body: (Generator.Element) throws -> Void) rethrows {
+        try posts.forEach(body)
+    }
+    
+    public func dropFirst(n: Int = 1) -> SubSequence {
+        return posts.dropFirst(n)
+    }
+    
+    public func dropLast(n: Int = 1) -> SubSequence {
+        return posts.dropLast(n)
+    }
+    
+    public func prefix(maxLength: Int) -> SubSequence {
+        return posts.prefix(maxLength)
+    }
+
+    public func suffix(maxLength: Int) -> SubSequence {
+        return posts.suffix(maxLength)
+    }
+
+    public func split(maxSplit: Int, allowEmptySlices: Bool, @noescape isSeparator: (Generator.Element) throws -> Bool) rethrows -> [SubSequence] {
+        return try posts.split(maxSplit, allowEmptySlices: allowEmptySlices, isSeparator: isSeparator)
     }
 }

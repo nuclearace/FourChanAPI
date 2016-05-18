@@ -1,5 +1,5 @@
 //
-//  FCBoardOptions.swift
+//  FCBoardOption.swift
 //  FourChanAPI
 //
 //  Created by Erik Little on 5/13/16.
